@@ -36,6 +36,8 @@ ecocompress.db
 *.swp
 *.swo
 .DS_Store
+~$*
+*.docx
 
 # Temporary scripts
 debug_*.py
