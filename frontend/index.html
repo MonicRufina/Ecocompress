@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCompress | Carbon-Aware Adaptive Compression Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Ambient Glow -->
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <div class="nav-container">
+            <div class="brand" id="navBrand">
+                <div class="brand-icon">
+                    <span class="leaf-icon">🌱</span>
+                    <span class="pulse-ring"></span>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Eco<span class="highlight">Compress</span></span>
+                    <span class="brand-sub">Carbon-Aware Engine</span>
+                </div>
+            </div>
+
+            <!-- Main Navigation Links -->
+            <nav class="nav-links" id="mainNav">
+                <button class="nav-item active" data-tab="tab-overview" onclick="switchTab('tab-overview')">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Overview</span>
+                </button>
+                <button class="nav-item" data-tab="tab-compress" onclick="switchTab('tab-compress')">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Compress</span>
+                </button>
+                <button class="nav-item" data-tab="tab-carbon" onclick="switchTab('tab-carbon')">
+                    <span class="nav-icon">🌍</span>
+                    <span class="nav-label">Carbon Intelligence</span>
+                </button>
+                <button class="nav-item" data-tab="tab-scheduler" onclick="switchTab('tab-scheduler')">
+                    <span class="nav-icon">⏱️</span>
+                    <span class="nav-label">Scheduler</span>
+                    <span class="nav-badge" id="schedBadge">2</span>
+                </button>
+                <button class="nav-item" data-tab="tab-reports" onclick="switchTab('tab-reports')">
+                    <span class="nav-icon">📜</span>
+                    <span class="nav-label">Reports & History</span>
+                </button>
+                <button class="nav-item" data-tab="tab-settings" onclick="switchTab('tab-settings')">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-label">Settings</span>
+                </button>
+            </nav>
+
+            <!-- Telemetry Indicator & Theme Widget -->
+            <div class="nav-telemetry">
+                <div class="telemetry-pill grid-pill" id="topGridPill" title="Current Grid Carbon Intensity">
+                    <span class="pill-dot pulse-high" id="topGridDot"></span>
+                    <span class="pill-region" id="topGridRegion">🇮🇳 India</span>
+                    <span class="pill-value" id="topGridValue">620 g/kWh</span>
+                    <span class="badge-tag tag-high" id="topGridBadge">HIGH</span>
+                </div>
+
+                <div class="telemetry-pill mode-pill" id="topModePill" title="Currently Active Optimization Mode">
+                    <span class="mode-icon">🌱</span>
+                    <span class="mode-text" id="topActiveMode">Balanced</span>
+                </div>
+
+                <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme (Cyber-Eco / OLED / Dark / Light)">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main View Container -->
+    <main class="app-body">
+        
+        <!-- ============================================================ -->
+        <!-- 1. OVERVIEW (HOME) TAB -->
+        <!-- ============================================================ -->
+        <section class="tab-pane active" id="tab-overview">
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <h2>Sustainable Data Compression Dashboard</h2>
+                    <p id="heroStatusText">Real-time carbon telemetry active. Grid intensity is currently <strong id="heroIntensityText">High (620 gCO₂/kWh)</strong> — adaptive compute modulation saving net kilowatt-hours.</p>
+                </div>
+                <div class="hero-actions">
+                    <button class="primary-btn hero-btn" onclick="switchTab('tab-compress')">⚡ Start New Compression</button>
+                    <button class="secondary-btn hero-btn" onclick="switchTab('tab-carbon')">🌍 View 24h Carbon Curve</button>
+                </div>
+            </div>
+
+            <!-- KPI Cards Grid -->
+            <div class="kpi-grid">
+                <div class="glass-card kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Total CO₂ Saved</span>
+                        <span class="kpi-icon-badge">🌿</span>
+                    </div>
+                    <div class="kpi-metric" id="kpiCo2Saved">1,482.4 <span class="kpi-unit">gCO₂</span></div>
+                    <div class="kpi-footer text-positive">
+                        <span>↑ 24.8% vs. static gzip</span>
+                    </div>
+                </div>
+
+                <div class="glass-card kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Bytes Saved</span>
+                        <span class="kpi-icon-badge">💾</span>
+                    </div>
+                    <div class="kpi-metric" id="kpiBytesSaved">418.6 <span class="kpi-unit">MB</span></div>
+                    <div class="kpi-footer text-muted">
+                        <span>Average 62.4% storage reduction</span>
+                    </div>
+                </div>
+
+                <div class="glass-card kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Average Compression Ratio</span>
+                        <span class="kpi-icon-badge">📐</span>
+                    </div>
+                    <div class="kpi-metric" id="kpiAvgRatio">2.66 <span class="kpi-unit">x</span></div>
+                    <div class="kpi-footer text-positive">
+                        <span>High redundancy leverage</span>
+                    </div>
+                </div>
+
+                <div class="glass-card kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Files Processed</span>
+                        <span class="kpi-icon-badge">📁</span>
+                    </div>
+                    <div class="kpi-metric" id="kpiFilesProcessed">152</div>
+                    <div class="kpi-footer text-positive">
+                        <span>✓ 100% Lossless Verified</span>
+                    </div>
+                </div>
+
+                <div class="glass-card kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Energy Consumed</span>
+                        <span class="kpi-icon-badge">⚡</span>
+                    </div>
+                    <div class="kpi-metric" id="kpiEnergyUsed">18,420 <span class="kpi-unit">J</span></div>
+                    <div class="kpi-footer text-muted">
+                        <span id="kpiEnergyWh">5.12 Watt-hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Main Grid: Trend Chart & Current Grid Status -->
+            <div class="overview-dual-grid">
+                <!-- Trend Chart Card -->
+                <div class="glass-card chart-card">
+                    <div class="card-header-flex">
+                        <div>
+                            <h3>CO₂ Emissions Saved vs. Fixed-GZIP Baseline</h3>
+                            <p class="subtitle">Cumulative carbon avoided by dynamic codec & window modulation</p>
+                        </div>
+                        <div class="chart-legend">
+                            <span class="legend-item"><span class="legend-color legend-eco"></span> EcoCompress (Adaptive)</span>
+                            <span class="legend-item"><span class="legend-color legend-gzip"></span> Fixed-GZIP (Level 6)</span>
+                        </div>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="trendChartCanvas" width="700" height="260"></canvas>
+                    </div>
+                </div>
+
+                <!-- Grid Status & Active Mode Card -->
+                <div class="glass-card grid-status-card">
+                    <div class="card-header-flex">
+                        <div>
+                            <h3>Live Grid Carbon Status</h3>
+                            <p class="subtitle" id="gridRegionSubtitle">India (National Grid) 🇮🇳</p>
+                        </div>
+                        <span class="badge-tag tag-high" id="overviewGridBadge">HIGH CARBON</span>
+                    </div>
+
+                    <div class="gauge-display">
+                        <div class="gauge-circle" id="gaugeCircle">
+                            <div class="gauge-inner">
+                                <span class="gauge-number" id="overviewIntensityNum">620</span>
+                                <span class="gauge-unit">g CO₂/kWh</span>
+                            </div>
+                        </div>
+                        <div class="gauge-intel">
+                            <div class="intel-row">
+                                <span class="intel-label">Greenest Window:</span>
+                                <strong class="intel-val text-positive" id="overviewGreenWin">03:00 - 05:00 UTC</strong>
+                            </div>
+                            <div class="intel-row">
+                                <span class="intel-label">Potential Shift Savings:</span>
+                                <strong class="intel-val text-positive" id="overviewGreenSavings">-62.5% CO₂</strong>
+                            </div>
+                            <div class="intel-row">
+                                <span class="intel-label">Generation Mix:</span>
+                                <span class="intel-val text-muted" id="overviewFuelMix">Coal 58%, Solar/Wind 24%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="active-mode-selector-box">
+                        <span class="mode-box-title">Currently Active Profile</span>
+                        <div class="mode-toggle-group">
+                            <button class="mode-btn" data-mode="Eco">🌱 Eco</button>
+                            <button class="mode-btn active" data-mode="Balanced">⚖️ Balanced</button>
+                            <button class="mode-btn" data-mode="Speed">⚡ Speed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-World Equivalents Strip -->
+            <div class="equivalents-strip glass-card">
+                <span class="equiv-title">Total ESG Carbon Offset Equivalents:</span>
+                <div class="equiv-items">
+                    <div class="equiv-item">
+                        <span class="equiv-icon">📱</span>
+                        <div>
+                            <strong id="equivPhones">180.3</strong>
+                            <span class="equiv-desc">Smartphone charges</span>
+                        </div>
+                    </div>
+                    <div class="equiv-item">
+                        <span class="equiv-icon">🚗</span>
+                        <div>
+                            <strong id="equivEv">15.6</strong>
+                            <span class="equiv-desc">EV km driven</span>
+                        </div>
+                    </div>
+                    <div class="equiv-item">
+                        <span class="equiv-icon">💡</span>
+                        <div>
+                            <strong id="equivLed">592.8</strong>
+                            <span class="equiv-desc">LED bulb hours</span>
+                        </div>
+                    </div>
+                    <div class="equiv-item">
+                        <span class="equiv-icon">🌳</span>
+                        <div>
+                            <strong id="equivTrees">24.7</strong>
+                            <span class="equiv-desc">Tree-seedling days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 2. COMPRESS TAB -->
+        <!-- ============================================================ -->
+        <section class="tab-pane" id="tab-compress">
+            <div class="section-heading">
+                <h2>Carbon-Aware Compression Studio</h2>
+                <p>Upload files or folder, configure optimization weights or carbon budgets, and compress immediately or defer to greener hours.</p>
+            </div>
+
+            <div class="compress-layout">
+                <!-- Left: Configuration Form -->
+                <div class="glass-panel compress-form-card">
+                    <form id="compressForm">
+                        <!-- Drop Zone -->
+                        <div class="file-drop-area" id="mainDropZone">
+                            <input type="file" id="compressFileInput" name="file" accept=".txt,.csv,.json,.pdf,.png,.jpg,.jpeg,.mp4,.mov,.mkv,.avi,.webm,.tar,.zip,.bin,.log" required>
+                            <div class="drop-illustration">📁</div>
+                            <span class="file-msg" id="compressDropMsg">Drag & drop files or click to browse</span>
+                            <span class="file-submsg">Supports documents (PDF/TXT), datasets (CSV/JSON), images, videos (MP4/MOV/WebM/MKV), and archives</span>
+                        </div>
+
+                        <!-- File Selected Preview Bar -->
+                        <div class="file-preview-strip" id="filePreviewStrip" style="display: none;">
+                            <span class="file-icon" id="previewIcon">📄</span>
+                            <div class="file-details">
+                                <span class="file-name" id="previewFileName">filename.ext</span>
+                                <span class="file-size" id="previewFileSize">0 KB</span>
+                            </div>
+                            <button type="button" class="btn-clear-file" id="btnClearFile" title="Clear selection">✕</button>
+                        </div>
+
+                        <!-- Mode Selector & Weights -->
+                        <div class="controls-block">
+                            <label class="control-label">Optimization Mode</label>
+                            <div class="mode-pills-selector" id="compressModePills">
+                                <button type="button" class="mode-pill-opt" data-val="Eco">
+                                    <span class="pill-name">🌱 Eco</span>
+                                    <span class="pill-desc">Min compute carbon</span>
+                                </button>
+                                <button type="button" class="mode-pill-opt active" data-val="Balanced">
+                                    <span class="pill-name">⚖️ Balanced</span>
+                                    <span class="pill-desc">Optimal trade-off</span>
+                                </button>
+                                <button type="button" class="mode-pill-opt" data-val="Speed">
+                                    <span class="pill-name">⚡ Speed</span>
+                                    <span class="pill-desc">Fast low-latency</span>
+                                </button>
+                                <button type="button" class="mode-pill-opt" data-val="Minimum File Size">
+                                    <span class="pill-name">📦 Max Ratio</span>
+                                    <span class="pill-desc">Deepest compression</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3-Way Weight Sliders (Carbon vs Ratio vs Speed) -->
+                        <div class="controls-block sliders-block">
+                            <div class="slider-header-row">
+                                <label class="control-label">Multi-Objective Weight Distribution</label>
+                                <span class="weights-sum-badge" id="weightSumBadge">100% Balanced</span>
+                            </div>
+
+                            <div class="slider-row">
+                                <span class="slider-label">🌿 Carbon Priority</span>
+                                <input type="range" id="sliderCarbon" min="0" max="100" value="35" class="custom-range range-carbon">
+                                <span class="slider-val" id="valCarbon">35%</span>
+                            </div>
+                            <div class="slider-row">
+                                <span class="slider-label">📦 Compression Ratio</span>
+                                <input type="range" id="sliderRatio" min="0" max="100" value="35" class="custom-range range-ratio">
+                                <span class="slider-val" id="valRatio">35%</span>
+                            </div>
+                            <div class="slider-row">
+                                <span class="slider-label">⚡ Processing Speed</span>
+                                <input type="range" id="sliderSpeed" min="0" max="100" value="30" class="custom-range range-speed">
+                                <span class="slider-val" id="valSpeed">30%</span>
+                            </div>
+                        </div>
+
+                        <!-- Grid Carbon Intensity & Carbon Budget Row -->
+                        <div class="controls-grid-2">
+                            <div class="control-group">
+                                <label for="compressCarbonIntensity">Grid Carbon Intensity (g CO₂/kWh)</label>
+                                <div class="input-with-pill">
+                                    <input type="number" id="compressCarbonIntensity" value="620" step="1">
+                                    <button type="button" class="btn-sync-grid" id="btnSyncGrid" title="Sync with current region">🔄 Sync</button>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="compressCarbonBudget">Job Carbon Budget (Max gCO₂ / job)</label>
+                                <input type="number" id="compressCarbonBudget" placeholder="Optional e.g. 0.05" step="0.001">
+                            </div>
+                        </div>
+
+                        <!-- Carbon Budget Exceeded Alert (Dynamic) -->
+                        <div class="alert-budget-warning" id="budgetAlertBox" style="display: none;">
+                            <span class="alert-icon">⚠️</span>
+                            <span class="alert-msg" id="budgetAlertMsg">Carbon budget limit detected! Consider scheduling this job for the greenest window.</span>
+                        </div>
+
+                        <!-- Dual Action Buttons: Compress Now vs Schedule Greener -->
+                        <div class="compress-action-dual">
+                            <button type="submit" class="primary-btn btn-compress-now" id="btnCompressNow">
+                                🚀 Compress Now
+                            </button>
+                            <button type="button" class="secondary-btn btn-schedule-green" id="btnScheduleGreen">
+                                ⏳ Schedule for Greener Window
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Loading State -->
+                    <div class="loader-container" id="compressLoader" style="display: none;">
+                        <div class="spinner"></div>
+                        <p class="loader-title">Analyzing entropy & executing multi-codec carbon evaluation...</p>
+                        <p class="loader-sub">Measuring CPU cycles, memory RSS, watt-seconds, and baseline comparisons</p>
+                    </div>
+                </div>
+
+                <!-- Right: Live Results & Downloads -->
+                <div class="glass-panel compress-results-card" id="compressResultsCard" style="display: none;">
+                    <div class="results-header">
+                        <h3>Compression Result & Decision Analysis</h3>
+                        <span class="verified-pill" id="resVerifiedBadge">✓ Lossless Intact (100%)</span>
+                    </div>
+
+                    <!-- Winner Announcement Box -->
+                    <div class="winner-box">
+                        <div class="winner-top">
+                            <span class="winner-label">Chosen Algorithm & Level:</span>
+                            <span class="winner-algo" id="resChosenAlgo">Eco-LZH (Level 4)</span>
+                        </div>
+                        <p class="winner-reason" id="resDecisionReason">Selected by Eco-Optimization engine to prevent CPU wattage spike under high grid carbon intensity.</p>
+                        <div class="winner-metrics">
+                            <div class="metric-mini">
+                                <span class="m-title">Compression Ratio</span>
+                                <strong class="m-val" id="resRatio">2.68x</strong>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="m-title">Energy Used</span>
+                                <strong class="m-val" id="resJoules">24.5 J</strong>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="m-title">Carbon Emitted</span>
+                                <strong class="m-val" id="resCarbon">0.0042 g</strong>
+                            </div>
+                            <div class="metric-mini">
+                                <span class="m-title">Saved vs. GZIP</span>
+                                <strong class="m-val text-positive" id="resSavedVsGzip">+0.0028 g</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download Action Buttons -->
+                    <div class="download-cluster">
+                        <a id="resBtnAlgo" class="primary-btn btn-dl" target="_blank">📥 Download Compressed File</a>
+                        <a id="resBtnPreview" class="preview-btn btn-dl" target="_blank">👁️ Open / Preview in Browser</a>
+                        <a id="resBtnZip" class="secondary-btn btn-dl" target="_blank">📦 Universal Archive (.zip)</a>
+                        <a id="resBtnRawBitstream" class="secondary-btn btn-dl" target="_blank" style="display: none;">🔬 Raw Codec Bitstream</a>
+                    </div>
+
+                    <!-- Embedded Video Player Preview (for video compressions) -->
+                    <div id="resVideoPlayerContainer" style="display: none; margin: 18px 0; border-radius: 10px; overflow: hidden; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px;">
+                        <div style="font-size: 0.78rem; font-weight: 700; color: #38bdf8; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                            <span>🎬</span> <span>Compressed Video Playback Preview:</span>
+                        </div>
+                        <video id="resVideoPlayer" controls style="width: 100%; max-height: 320px; border-radius: 6px; display: block; background: #000;"></video>
+                    </div>
+
+                    <div class="download-format-explainer">
+                        <span class="explainer-icon">💡</span>
+                        <span id="resFormatExplainerText"><strong>Format Guarantee:</strong> The primary green button downloads the compressed file retaining the <strong>exact same file extension and properties</strong> (e.g. <code>.pdf</code>, <code>.csv</code>, <code>.txt</code>, <code>.png</code>) so it opens directly in standard applications.</span>
+                    </div>
+
+                    <!-- Cryptographic Hash Verification -->
+                    <div class="hash-box">
+                        <span class="hash-label">SHA-256 Checksum:</span>
+                        <code class="hash-code" id="resSha256">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
+                    </div>
+
+                    <!-- Codec Comparison Table -->
+                    <div class="results-table-box">
+                        <h4>Multi-Codec Performance Breakdown</h4>
+                        <div class="table-responsive">
+                            <table class="data-table" id="compressComparisonTable">
+                                <thead>
+                                    <tr>
+                                        <th>Codec</th>
+                                        <th>Size (MB)</th>
+                                        <th>Ratio</th>
+                                        <th>Time (s)</th>
+                                        <th>Energy (J)</th>
+                                        <th>CO₂ (g)</th>
+                                        <th>Saved vs Gzip</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Injected by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 4. CARBON INTELLIGENCE TAB -->
+        <!-- ============================================================ -->
+        <section class="tab-pane" id="tab-carbon">
+            <div class="section-heading">
+                <h2>Global Grid Carbon Intelligence</h2>
+                <p>24-hour forecast curves, optimal renewable generation valleys, cross-region comparisons, and what-if simulation.</p>
+            </div>
+
+            <div class="carbon-top-bar glass-card">
+                <div class="region-select-wrap">
+                    <label for="carbonRegionSelect">Select Grid Region:</label>
+                    <select id="carbonRegionSelect" class="custom-select">
+                        <option value="India" selected>🇮🇳 India (National Grid)</option>
+                        <option value="France">🇫🇷 France (RTE Grid)</option>
+                        <option value="Norway">🇳🇴 Norway (Statnett Grid)</option>
+                        <option value="Germany">🇩🇪 Germany (Agora Energiewende)</option>
+                        <option value="US-CA">🇺🇸 USA (California - CAISO)</option>
+                        <option value="UK">🇬🇧 United Kingdom (National Grid ESO)</option>
+                        <option value="Japan">🇯🇵 Japan (TEPCO Tokyo)</option>
+                        <option value="Australia">🇦🇺 Australia (NEM Eastern)</option>
+                    </select>
+                </div>
+
+                <div class="region-summary-strip" id="regionSummaryStrip">
+                    <div class="reg-stat"><span>Current Intensity:</span> <strong id="ciCurrentVal">620 g/kWh</strong></div>
+                    <div class="reg-stat"><span>Grid Fuel Mix:</span> <span id="ciFuelMix">Coal 58%, Solar/Wind 24%</span></div>
+                    <div class="reg-stat"><span>Status:</span> <span class="badge-tag tag-high" id="ciBadge">HIGH</span></div>
+                </div>
+            </div>
+
+            <!-- 24-Hour Forecast Curve Card -->
+            <div class="glass-card forecast-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>24-Hour Grid Carbon Forecast & Optimal Windows</h3>
+                        <p class="subtitle">Diurnal solar/wind cycle vs. evening fossil thermal peaks</p>
+                    </div>
+                    <div class="forecast-highlights">
+                        <span class="best-pill" id="ciBestPill">🌟 Best Window: 03:00 UTC (-62%)</span>
+                        <span class="worst-pill" id="ciWorstPill">⚠️ Peak: 19:00 UTC</span>
+                    </div>
+                </div>
+
+                <div class="canvas-wrapper">
+                    <canvas id="carbon24hCanvas" width="900" height="260"></canvas>
+                </div>
+            </div>
+
+            <!-- Cross-Region Comparison & What-If Simulator Dual -->
+            <div class="carbon-dual-grid">
+                <!-- Regional Comparison Bars Card -->
+                <div class="glass-card region-compare-card">
+                    <h3>Global Grid Carbon Intensity Comparison</h3>
+                    <p class="subtitle">Real-time gCO₂/kWh across international data center zones</p>
+                    <div class="region-bars-container" id="regionBarsContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- What-If Carbon Simulator Card -->
+                <div class="glass-card whatif-card">
+                    <h3>What-If Carbon Scenario Simulator</h3>
+                    <p class="subtitle">Simulate running the exact same compression workload across regions or hours</p>
+
+                    <div class="whatif-form">
+                        <div class="form-row">
+                            <label>Dataset Size:</label>
+                            <div class="input-btn-group">
+                                <input type="number" id="whatifSize" value="100" min="1" max="100000">
+                                <select id="whatifSizeUnit">
+                                    <option value="MB" selected>MB</option>
+                                    <option value="GB">GB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Compare Workload Between:</label>
+                            <div class="compare-regions-row">
+                                <select id="whatifRegionA" class="custom-select"></select>
+                                <span class="vs-badge">VS</span>
+                                <select id="whatifRegionB" class="custom-select"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Annual Access / Download Count:</label>
+                            <input type="range" id="whatifDownloads" min="1" max="500" value="50" class="custom-range">
+                            <span class="range-display-val" id="whatifDownloadsVal">50 downloads/year</span>
+                        </div>
+
+                        <div class="whatif-result-box" id="whatifResultBox">
+                            <div class="whatif-stat">
+                                <span>Emissions in Region A:</span>
+                                <strong id="wiCarbonA">4.82 gCO₂</strong>
+                            </div>
+                            <div class="whatif-stat">
+                                <span>Emissions in Region B:</span>
+                                <strong id="wiCarbonB">0.42 gCO₂</strong>
+                            </div>
+                            <div class="whatif-stat net-saved">
+                                <span>Net Difference Avoided:</span>
+                                <strong class="text-positive" id="wiSaved">4.40 gCO₂ (-91.3%)</strong>
+                            </div>
+                            <div class="whatif-stat">
+                                <span>ESG Carbon Score:</span>
+                                <span class="esg-grade" id="wiGrade">A+ (Exemplary)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 5. SCHEDULER TAB -->
+        <!-- ============================================================ -->
+        <section class="tab-pane" id="tab-scheduler">
+            <div class="section-heading">
+                <h2>Carbon-Aware Job Scheduler</h2>
+                <p>Deferred compression queue with deadline guarantees. Jobs automatically run during predicted renewable grid valleys to eliminate compute emissions.</p>
+            </div>
+
+            <!-- Gantt-Style Timeline Overlaid on Carbon Curve -->
+            <div class="glass-card scheduler-gantt-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>24-Hour Scheduled Execution Timeline vs. Carbon Intensity</h3>
+                        <p class="subtitle">Jobs queued to execute during the greenest carbon dips before deadlines</p>
+                    </div>
+                    <button class="primary-btn btn-new-job" id="btnOpenNewJobModal">+ Schedule Deferred Job</button>
+                </div>
+
+                <div class="gantt-timeline-container">
+                    <canvas id="schedulerGanttCanvas" width="900" height="200"></canvas>
+                    <div id="ganttTooltip" class="gantt-tooltip" style="display: none; position: absolute; pointer-events: none; z-index: 20;"></div>
+                </div>
+
+                <div class="gantt-legend" style="display: flex; gap: 16px; margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); flex-wrap: wrap;">
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #10b981; border-radius: 3px; display: inline-block;"></span> 🌿 Eco Job</span>
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #0284c7; border-radius: 3px; display: inline-block;"></span> ⚖️ Balanced Job</span>
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #f97316; border-radius: 3px; display: inline-block;"></span> ⚡ Speed Job</span>
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #475569; border-radius: 3px; display: inline-block;"></span> ✓ Completed</span>
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 3px; background: rgba(56, 189, 248, 0.7); display: inline-block;"></span> Grid Forecast Curve</span>
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: rgba(16, 185, 129, 0.15); border: 1px dashed #10b981; border-radius: 3px; display: inline-block;"></span> Optimal Green Window</span>
+                    <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 2px; background: #ef4444; border-top: 2px dashed #ef4444; display: inline-block;"></span> Current Time</span>
+                </div>
+            </div>
+
+            <!-- Scheduled Queue Table -->
+            <div class="glass-card queue-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>Deferred Job Queue</h3>
+                        <p class="subtitle">Manage pending, running, and completed batch compression tasks</p>
+                    </div>
+                    <span class="queue-status-tag" id="queueCountTag">3 Active Jobs</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="schedulerTable">
+                        <thead>
+                            <tr>
+                                <th>Job ID</th>
+                                <th>Filename</th>
+                                <th>Size</th>
+                                <th>Mode</th>
+                                <th>Target Green Window</th>
+                                <th>Deadline</th>
+                                <th>Expected CO₂ Saved</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- New Job Scheduling Modal / Inline Drawer -->
+            <div class="schedule-drawer glass-panel" id="scheduleDrawer" style="display: none;">
+                <div class="drawer-header">
+                    <h3>Schedule New Compression Job</h3>
+                    <button type="button" class="btn-close-drawer" id="btnCloseDrawer">✕</button>
+                </div>
+                <form id="scheduleJobForm" class="drawer-form">
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label>File Name</label>
+                            <input type="text" id="schedFileName" required placeholder="e.g. database_backup_2026.dump">
+                        </div>
+                        <div class="form-group">
+                            <label>Estimated Size (MB)</label>
+                            <input type="number" id="schedFileSize" value="50" min="1">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group">
+                            <label>Mode</label>
+                            <select id="schedMode">
+                                <option value="Eco">🌱 Eco (Maximum Carbon Shift)</option>
+                                <option value="Balanced" selected>⚖️ Balanced</option>
+                                <option value="Speed">⚡ Speed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Deadline</label>
+                            <input type="text" id="schedDeadline" value="Tomorrow 08:00 UTC">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Execution Window</label>
+                            <input type="text" id="schedTargetTime" value="Tonight 03:00 - 05:00 (Wind Valley)">
+                        </div>
+                    </div>
+
+                    <div class="drawer-actions">
+                        <button type="submit" class="primary-btn">Confirm & Queue Job</button>
+                        <button type="button" class="secondary-btn" id="btnCancelDrawer">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 8. REPORTS AND HISTORY TAB -->
+        <!-- ============================================================ -->
+        <section class="tab-pane" id="tab-reports">
+            <div class="section-heading">
+                <h2>Reports & Comprehensive Audit History</h2>
+                <p>Complete searchable ledger of every compression job, ESG compliance export, and certified sustainability metrics.</p>
+            </div>
+
+            <!-- History Controls & Export Buttons -->
+            <div class="reports-controls-bar glass-card">
+                <div class="search-filter-group">
+                    <div class="search-input-wrap">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="historySearchInput" placeholder="Search by file name or codec...">
+                    </div>
+                    <select id="historyModeFilter" class="custom-select">
+                        <option value="All">All Modes</option>
+                        <option value="Eco">Eco Mode</option>
+                        <option value="Balanced">Balanced Mode</option>
+                        <option value="Speed">Speed Mode</option>
+                        <option value="Minimum File Size">Max Ratio</option>
+                    </select>
+                </div>
+
+                <div class="export-btn-group">
+                    <button class="secondary-btn btn-export" id="btnExportCsv">📄 Export CSV</button>
+                    <button class="primary-btn btn-export" id="btnGenerateEsgReport">📜 Generate ESG Carbon Report</button>
+                </div>
+            </div>
+
+            <!-- Full History Table -->
+            <div class="glass-card history-table-card">
+                <div class="table-responsive">
+                    <table class="data-table" id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Job ID</th>
+                                <th>Timestamp</th>
+                                <th>Filename</th>
+                                <th>Original</th>
+                                <th>Codec</th>
+                                <th>Compressed</th>
+                                <th>Ratio</th>
+                                <th>Joules (J)</th>
+                                <th>CO₂ Emitted</th>
+                                <th>CO₂ Saved</th>
+                                <th>Status</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ESG Report Modal / Printable Document Overlay -->
+            <div class="esg-modal-overlay" id="esgModalOverlay" style="display: none;">
+                <div class="esg-modal-content glass-card">
+                    <div class="esg-header">
+                        <div class="esg-seal">🌿 ISO 14064 COMPLIANT</div>
+                        <h2>ESG Sustainability & Carbon Reduction Certificate</h2>
+                        <p class="esg-sub">EcoCompress Scope 2 GHG Emission Mitigation Audit</p>
+                        <button type="button" class="btn-close-modal" id="btnCloseEsgModal">✕</button>
+                    </div>
+
+                    <div class="esg-body" id="esgModalBody">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <div class="esg-footer-actions">
+                        <button type="button" class="primary-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+                        <button type="button" class="secondary-btn" id="btnCloseEsgModalBtn">Close Report</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 9. SETTINGS TAB -->
+        <!-- ============================================================ -->
+        <section class="tab-pane" id="tab-settings">
+            <div class="section-heading">
+                <h2>System Settings & Preferences</h2>
+                <p>Configure live carbon telemetry sources, regional grid defaults, energy measurement instrumentation, cost weights, and visual themes.</p>
+            </div>
+
+            <form id="settingsForm">
+                <div class="settings-grid">
+                    <!-- Carbon Telemetry Source Card -->
+                    <div class="glass-card setting-card">
+                        <h3>Carbon Intelligence Source</h3>
+                        <p class="subtitle">Connect live grid APIs or use the built-in diurnal simulation engine</p>
+
+                        <div class="form-group">
+                            <label>Data Provider</label>
+                            <div class="radio-pill-group">
+                                <label class="radio-pill">
+                                    <input type="radio" name="data_source" value="simulation" checked>
+                                    <span>High-Fidelity Simulation Mode</span>
+                                </label>
+                                <label class="radio-pill">
+                                    <input type="radio" name="data_source" value="live_api">
+                                    <span>Live API (Electricity Maps / WattTime)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="apiKeysBlock">
+                            <label>Electricity Maps API Key</label>
+                            <input type="password" id="settingApiKeyMaps" placeholder="Optional: Enter Electricity Maps API key">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Default Grid Region</label>
+                            <select id="settingDefaultRegion" class="custom-select">
+                                <option value="India">🇮🇳 India (National Grid)</option>
+                                <option value="France">🇫🇷 France (RTE Grid)</option>
+                                <option value="Norway">🇳🇴 Norway (Statnett Grid)</option>
+                                <option value="Germany">🇩🇪 Germany (Agora Energiewende)</option>
+                                <option value="US-CA">🇺🇸 USA (California - CAISO)</option>
+                                <option value="UK">🇬🇧 United Kingdom (National Grid ESO)</option>
+                                <option value="Japan">🇯🇵 Japan (TEPCO Tokyo)</option>
+                                <option value="Australia">🇦🇺 Australia (NEM Eastern)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Energy Measurement Card -->
+                    <div class="glass-card setting-card">
+                        <h3>Energy Measurement Method</h3>
+                        <p class="subtitle">Hardware counter integration and emission calculation models</p>
+
+                        <div class="form-group">
+                            <label class="radio-pill">
+                                <input type="radio" name="energy_method" value="rapl">
+                                <span>Intel RAPL / AMD Hardware Energy Counters</span>
+                            </label>
+                            <label class="radio-pill">
+                                <input type="radio" name="energy_method" value="codecarbon">
+                                <span>CodeCarbon Open-Source Tracker</span>
+                            </label>
+                            <label class="radio-pill">
+                                <input type="radio" name="energy_method" value="estimated" checked>
+                                <span>Software Model (Calibrated TDP + CPU + RSS Memory)</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Default Active Profile</label>
+                            <select id="settingDefaultMode" class="custom-select">
+                                <option value="Eco">🌱 Eco Mode</option>
+                                <option value="Balanced" selected>⚖️ Balanced Mode</option>
+                                <option value="Speed">⚡ Speed Mode</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Custom Weights for Cost Model Card -->
+                    <div class="glass-card setting-card">
+                        <h3>Custom Cost Model Weights</h3>
+                        <p class="subtitle">Multi-objective decision coefficients: α·Size + β·Time + γ·Energy + δ·Carbon</p>
+
+                        <div class="settings-slider-row">
+                            <span>α (Size Reduction Weight):</span>
+                            <input type="range" id="setWeightSize" min="0" max="100" value="30" class="custom-range">
+                            <span class="w-val" id="setWeightSizeVal">0.30</span>
+                        </div>
+                        <div class="settings-slider-row">
+                            <span>β (Time / Latency Weight):</span>
+                            <input type="range" id="setWeightTime" min="0" max="100" value="20" class="custom-range">
+                            <span class="w-val" id="setWeightTimeVal">0.20</span>
+                        </div>
+                        <div class="settings-slider-row">
+                            <span>γ (Energy / Joules Weight):</span>
+                            <input type="range" id="setWeightEnergy" min="0" max="100" value="25" class="custom-range">
+                            <span class="w-val" id="setWeightEnergyVal">0.25</span>
+                        </div>
+                        <div class="settings-slider-row">
+                            <span>δ (Carbon Intensity Weight):</span>
+                            <input type="range" id="setWeightCarbon" min="0" max="100" value="25" class="custom-range">
+                            <span class="w-val" id="setWeightCarbonVal">0.25</span>
+                        </div>
+                    </div>
+
+                    <!-- Appearance & Units Card -->
+                    <div class="glass-card setting-card">
+                        <h3>Interface Appearance & Units</h3>
+                        <p class="subtitle">Display themes and preferred metric units</p>
+
+                        <div class="form-group">
+                            <label>Visual Theme</label>
+                            <select id="settingThemeSelect" class="custom-select">
+                                <option value="dark" selected>Cyber-Eco Dark (Default)</option>
+                                <option value="oled">Deep OLED Black</option>
+                                <option value="slate">Classic Slate</option>
+                                <option value="light">Eco Light</option>
+                            </select>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>Energy Unit</label>
+                                <select id="settingUnitEnergy" class="custom-select">
+                                    <option value="J" selected>Joules (J)</option>
+                                    <option value="Wh">Watt-hours (Wh)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Carbon Unit</label>
+                                <select id="settingUnitCarbon" class="custom-select">
+                                    <option value="g" selected>Grams (g CO₂)</option>
+                                    <option value="kg">Kilograms (kg CO₂)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data Size Units</label>
+                            <select id="settingUnitBytes" class="custom-select">
+                                <option value="decimal" selected>Decimal (KB, MB, GB)</option>
+                                <option value="binary">Binary (KiB, MiB, GiB)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button type="submit" class="primary-btn btn-save-settings">💾 Save All Preferences</button>
+                    <button type="button" class="secondary-btn" id="btnRestoreDefaults">↺ Restore Factory Defaults</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Notification Toast Popup -->
+    <div class="toast-popup" id="toastPopup">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">Action completed successfully.</span>
+    </div>
+
+    <!-- Core App Logic Script -->
+    <script src="script.js"></script>
+</body>
+</html>
