@@ -1,0 +1,42 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+*/venv/
+*/env/
+
+# Uploaded test payloads and cache binaries (large files > 100MB exceed GitHub limits)
+uploads/
+*/uploads/
+*.bin
+*.mp4
+*.mov
+*.mkv
+*.webm
+
+# SQLite local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+compression_logs.db
+*/compression_logs.db
+ecocompress.db
+*/ecocompress.db
+
+# IDE and Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Temporary scripts
+debug_*.py
+test_*.py
